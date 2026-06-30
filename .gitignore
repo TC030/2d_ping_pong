@@ -1,0 +1,16 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+*.translation
+
+# Mono/C# (.NET) specific ignores
+bin/
+obj/
+.dotnet/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# Visual Studio Code specific ignores
+.vscode/
