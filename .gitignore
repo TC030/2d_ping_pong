@@ -14,6 +14,7 @@ obj/
 
 # Visual Studio Code specific ignores
 .vscode/
+*.code-workspace
 
 # Ignore Godot C# UID files globally
 *.uid
