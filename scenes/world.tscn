@@ -1,39 +1,61 @@
 [gd_scene format=3 uid="uid://c3p4sixfghwq4"]
 
+[ext_resource type="Script" uid="uid://umkhfgogyo3p" path="res://src/actors/World.cs" id="1_4wyf3"]
 [ext_resource type="Script" uid="uid://d04jd8prvlgwy" path="res://src/actors/PlayerPaddle.cs" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://ckofgsn3j0686" path="res://scenes/Ball.tscn" id="2_rwgxs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrlwn"]
-size = Vector2(30, 120)
+size = Vector2(32, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n8sjj"]
 size = Vector2(1152, 16)
 
-[node name="World" type="Node2D" unique_id=701614494]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dk8"]
+size = Vector2(64, 672)
+
+[node name="World" type="Node2D" unique_id=701614494 node_paths=PackedStringArray("_ball")]
+script = ExtResource("1_4wyf3")
+_ball = NodePath("Ball")
 
 [node name="PlayerPaddle" type="CharacterBody2D" parent="." unique_id=1644631846]
-position = Vector2(100, 100)
+position = Vector2(96, 256)
 script = ExtResource("1_f3sb7")
 
 [node name="ColorRect" type="ColorRect" parent="PlayerPaddle" unique_id=744199294]
-offset_right = 30.0
-offset_bottom = 120.0
+offset_right = 32.0
+offset_bottom = 128.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPaddle" unique_id=1987467197]
-position = Vector2(15, 60)
+position = Vector2(16, 64)
 shape = SubResource("RectangleShape2D_hrlwn")
 
 [node name="Ball" parent="." unique_id=489754294 instance=ExtResource("2_rwgxs")]
 position = Vector2(186, 152)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1624593939]
+[node name="UpperBoundary" type="StaticBody2D" parent="." unique_id=1624593939]
 position = Vector2(576, -8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=771972211]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBoundary" unique_id=771972211]
 shape = SubResource("RectangleShape2D_n8sjj")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1131468668]
+[node name="LowerBoundary" type="StaticBody2D" parent="." unique_id=1131468668]
 position = Vector2(576, 656)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2" unique_id=624376765]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LowerBoundary" unique_id=624376765]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_n8sjj")
+
+[node name="LeftGoal" type="Area2D" parent="." unique_id=562210317]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal" unique_id=972148085]
+position = Vector2(-32, 320)
+shape = SubResource("RectangleShape2D_33dk8")
+
+[node name="RightGoal" type="Area2D" parent="." unique_id=1620723658]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal" unique_id=1959968642]
+position = Vector2(1184, 320)
+shape = SubResource("RectangleShape2D_33dk8")
+
+[connection signal="body_entered" from="LeftGoal" to="." method="OnLeftGoalBodyEntered"]
+[connection signal="body_entered" from="RightGoal" to="." method="OnRightGoalBodyEntered"]
