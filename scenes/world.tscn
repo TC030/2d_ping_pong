@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://c3p4sixfghwq4"]
 
 [ext_resource type="Script" uid="uid://d04jd8prvlgwy" path="res://src/actors/PlayerPaddle.cs" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://ckofgsn3j0686" path="res://scenes/Ball.tscn" id="2_rwgxs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrlwn"]
 size = Vector2(30, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8sjj"]
+size = Vector2(1152, 16)
 
 [node name="World" type="Node2D" unique_id=701614494]
 
@@ -18,3 +22,18 @@ offset_bottom = 120.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPaddle" unique_id=1987467197]
 position = Vector2(15, 60)
 shape = SubResource("RectangleShape2D_hrlwn")
+
+[node name="Ball" parent="." unique_id=489754294 instance=ExtResource("2_rwgxs")]
+position = Vector2(186, 152)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1624593939]
+position = Vector2(576, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=771972211]
+shape = SubResource("RectangleShape2D_n8sjj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1131468668]
+position = Vector2(576, 656)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2" unique_id=624376765]
+shape = SubResource("RectangleShape2D_n8sjj")
