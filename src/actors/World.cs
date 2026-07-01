@@ -5,6 +5,8 @@ public partial class World : Node2D
 {
 	[Export] private Ball _ball;
 	[Export] private Timer _timer;
+	[Export] private Label _countdownLabel;
+
 	private bool _isNextLaunchLeft;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -15,10 +17,9 @@ public partial class World : Node2D
 	{
 		if (body is Ball)
 		{
-			_ball.ResetBall();
 			_isNextLaunchLeft = true;
 			GD.Print("Left Goal Scored!");
-			_timer.Start();
+			OnGoalBodyEntered();
 		}
 	}
 
@@ -26,11 +27,17 @@ public partial class World : Node2D
 	{
 		if (body is Ball)
 		{
-			_ball.ResetBall();
 			_isNextLaunchLeft = false;
 			GD.Print("Right Goal Scored!");
-			_timer.Start();
+			OnGoalBodyEntered();
 		}
+	}
+
+	private void OnGoalBodyEntered()
+	{
+		_ball.ResetBall();
+		_timer.Start();
+		_countdownLabel.Visible = true;
 	}
 
 	public void OnTimerTimeout()
@@ -42,5 +49,13 @@ public partial class World : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (!_timer.IsStopped())
+		{
+			_countdownLabel.Text = Math.Ceiling(_timer.TimeLeft).ToString();
+		}
+		else
+		{
+			_countdownLabel.Visible = false;
+		}
 	}
 }
