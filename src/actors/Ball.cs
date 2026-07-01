@@ -11,17 +11,17 @@ public partial class Ball : CharacterBody2D
 		_rng.Randomize();
 		_velocity = new Vector2(-1.0f, 0.5f).Normalized() * Speed;
 	}
-	private void LaunchBall(bool isMovingLeft)
+	public void LaunchBall(bool isMovingLeft)
 	{
 		float randomAngle = _rng.RandfRange(-Mathf.DegToRad(30), Mathf.DegToRad(30));
 		Vector2 baseDirection = isMovingLeft ? Vector2.Left: Vector2.Right;
 		_velocity = baseDirection.Rotated(randomAngle) * Speed;
 	}
-	public void ResetBall(bool isLeftPlayerLost)
+	public void ResetBall()
 	{
 		Vector2 CenterOfScreen = GetViewportRect().Size / 2;
 		GlobalPosition = CenterOfScreen;
-		LaunchBall(isMovingLeft: isLeftPlayerLost);
+		_velocity = Vector2.Zero;
 	}	
 	public override void _PhysicsProcess(double delta)
 	{
