@@ -30,7 +30,7 @@ position = Vector2(16, 64)
 shape = SubResource("RectangleShape2D_hrlwn")
 
 [node name="Ball" parent="." unique_id=489754294 instance=ExtResource("2_rwgxs")]
-position = Vector2(186, 152)
+position = Vector2(576, 320)
 
 [node name="UpperBoundary" type="StaticBody2D" parent="." unique_id=1624593939]
 position = Vector2(576, -8)

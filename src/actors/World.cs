@@ -14,7 +14,7 @@ public partial class World : Node2D
 	{
 		if (body is Ball)
 		{
-			_ball.ResetBall();
+			_ball.ResetBall(isLeftPlayerLost: true);
 			GD.Print("Left Goal Scored!");
 		}
 	}
@@ -23,7 +23,7 @@ public partial class World : Node2D
 	{
 		if (body is Ball)
 		{
-			_ball.ResetBall();
+			_ball.ResetBall(isLeftPlayerLost: false);
 			GD.Print("Right Goal Scored!");
 		}
 	}
